@@ -8,8 +8,7 @@ const displayData = displayAll =>{
     const amountOfDisplayData = displayAll;
     let showItems;
     if(amountOfDisplayData.length > 10) {
-      showItems = amountOfDisplayData.slice(0, 10)
-    }
+      showItems = amountOfDisplayData.slice(0, 10) }
     const getDiv = document.getElementById('product-div');
     getDiv.innerHTML = '';
     showItems.map(items =>{ 
@@ -48,4 +47,15 @@ document.getElementById('search-navbar').addEventListener('keypress', function (
     if(e.key === "Enter") {
       searchData()
     }
+})
+// See All Button Function 
+document.getElementById('see-all').addEventListener('click', function() {
+  
+  let count = 0;
+  count++;
+  if(count === 1) {
+    const button = document.getElementById('hide-btn')
+    button.classList.add('hidden')
+    
+  }
 })
