@@ -1,4 +1,5 @@
 // By Default Product Display 
+let spinner = document.getElementById('spinner');
 const loadData = () => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
     .then(res => res.json())
@@ -8,7 +9,10 @@ const displayData = displayAll =>{
     const amountOfDisplayData = displayAll;
     let showItems;
     if(amountOfDisplayData.length > 10) {
-      showItems = amountOfDisplayData.slice(0, 10) }
+      showItems = amountOfDisplayData.slice(0, 10) 
+    } else {
+      displayAll
+    }
     const getDiv = document.getElementById('product-div');
     getDiv.innerHTML = '';
     showItems.map(items =>{ 
@@ -30,6 +34,7 @@ const displayData = displayAll =>{
       </div>
     `;
     getDiv.appendChild(createDiv);
+    spinner.classList.add('hidden');
     }) 
 }
 loadData();
@@ -45,17 +50,19 @@ const searchData = () => {
 }
 document.getElementById('search-navbar').addEventListener('keypress', function (e) {
     if(e.key === "Enter") {
+      spinner.classList.remove('hidden');
       searchData()
     }
 })
 // See All Button Function 
 document.getElementById('see-all').addEventListener('click', function() {
-  
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
+    .then(res => res.json())
+    .then(data => displayData(data.drinks.slice(0, 100)))
   let count = 0;
   count++;
   if(count === 1) {
     const button = document.getElementById('hide-btn')
     button.classList.add('hidden')
-    
   }
 })
