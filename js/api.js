@@ -5,8 +5,14 @@ const loadData = () => {
     .then(data => displayData(data.drinks))
 }
 const displayData = displayAll =>{
+    const amountOfDisplayData = displayAll;
+    let showItems;
+    if(amountOfDisplayData.length > 10) {
+      showItems = amountOfDisplayData.slice(0, 10)
+    }
     const getDiv = document.getElementById('product-div');
-    displayAll.map(items =>{ 
+    getDiv.innerHTML = '';
+    showItems.map(items =>{ 
       const createDiv = document.createElement('div');
       createDiv.innerHTML = `
       <div class="flex justify-center">
@@ -32,10 +38,11 @@ loadData();
 const searchData = () => {
   const getSearchField = document.getElementById('search-navbar');
   const getValue = getSearchField.value;
-   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${getValue}`
+  getSearchField.value = '';
+   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${getValue}`
    fetch(url)
    .then(res => res.json())
-   .then(data => data)
+   .then(data => displayData(data.drinks))
 }
 document.getElementById('search-navbar').addEventListener('keypress', function (e) {
     if(e.key === "Enter") {
