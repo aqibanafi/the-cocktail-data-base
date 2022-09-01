@@ -12,14 +12,7 @@ const modalData = async(idDrink) => {
   const data = await res.json();
   getModal(data.drinks[0])
 }
-// To Display Default Data 
-const defaultData = async() => {
-  const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a`;
-  const res = await fetch(url);
-  const data = await res.json();
-  displayData(data.drinks);
-}
-defaultData();
+getData('a', 10)
 // Set Inner HTML of Search Data 
 const displayData = (displayValue, dataLimit) => {
   const getDiv = document.getElementById('main-container');
