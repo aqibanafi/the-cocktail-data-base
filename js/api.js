@@ -136,3 +136,30 @@ const spinner = (isSpin) => {
     spinDiv.classList.add('hidden');
   }
 }
+const getCategoryData = async() => {
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a`;
+  const res = await fetch(url);
+  const data = await res.json();
+  getCategory(data.drinks)
+}
+const getCategory = list => {
+  const getUl = document.getElementById('list-item')
+  const listArray = [];
+  list.map(items => {
+    if (listArray.indexOf(items.strCategory) === -1) {
+      listArray.push(items.strCategory);
+      const createLi = document.createElement('li');
+    createLi.innerHTML = `
+    <li class="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg"><span class="text-xl font-semibold text-red-700">${items.strCategory}</span></li>
+    `;
+    getUl.appendChild(createLi);
+    }
+  })
+  ;
+  
+  
+  
+  
+    
+}
+getCategoryData();
